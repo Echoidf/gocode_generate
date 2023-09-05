@@ -1,0 +1,9 @@
+package main
+
+{{range .TableInfo}}
+type {{UpperFirst .TableName}} struct {
+	{{range .Columns -}}
+		{{ToCamel .Field}}  {{ConvertType .ShortType}}  `db:"{{.Field}}" json:"{{JsonField .Field}},omitempty"`
+	{{end}}
+}
+{{end}}
