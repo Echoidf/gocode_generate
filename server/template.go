@@ -2,6 +2,7 @@ package server
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"model_generate/utils"
 )
@@ -59,7 +60,7 @@ func Init(dns string) {
 
 // 获取元数据
 func buildSchema(db *sql.DB, tableName string) []ColumnInfo {
-	rows, err := db.Query("SHOW COLUMNS FROM " + tableName)
+	rows, err := db.Query(fmt.Sprintf("SHOW COLUMNS FROM `%s`", tableName))
 	if err != nil {
 		log.Fatal(err)
 	}
